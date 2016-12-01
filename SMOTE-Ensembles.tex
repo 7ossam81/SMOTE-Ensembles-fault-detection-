@@ -112,7 +112,7 @@ under consideration and its nearest neighbor. Then it Multiplies the difference 
 
 \section{Model evaluation}
 \label{evaluation_criteria}
-In order to evaluate the developed churn prediction model, we refer to the confusion matrix shown in Figure \ref{fig:confusion} which is the primary source for accuracy estimation in classification problems. Based on this confusion matrix, the following four different criteria are used for evaluation:
+In order to evalute the performance of the software faults prediction model, we used the confusion matrix that shown in Figure \ref{fig:confusion}, which is a table that is often used to describe the classfication model results. 
 
 \begin{figure}[h]
 \label{fig:ss}
@@ -123,41 +123,25 @@ In order to evaluate the developed churn prediction model, we refer to the confu
 \label{fig:confusion}
 \end{figure}
 
-
-\begin{enumerate}
-
-
-
-\item Accuracy: Identifies the percentage of the total number of predictions that were correctly classified.
+The bug detection effectiveness is evaluated using four measurements based on the previous confusion matrix; namely, Model Accuracy (Acc), Number of Predicted Defects (PD), Numebr of Incorectly Predicted cases with No Defects (PF), G-mean. Acc is the ratio of the correctly predicted faults to the total number of faults. PD is
+the ratio of correctly predicted faults to the total number of faults. PF is the number of not fault-prone modules that are predicted incorrectly as defectes. In addtion, we used the G-mean to combine the PD and PF which is a good indicator of the relationship between the two measures. The PD, PF, G-mean are calculated in Equations \ref{accuracy}, \ref{PD}, \ref{PF}, and \ref{gmean}, respectively.
 
 \begin{equation}
 Accuracy=\frac{TP+TN}{TP + FN + FP + TN}
 \label{accuracy}
 \end{equation}
 
-\item PD: The percentage of predicted defects in actual number of defects. It can be given by the following equation:
-
 \begin{equation}
 PD=\frac{TP}{TP+FN}
 \end{equation}
-
-\item PF: is the number of not fault-prone modules that are classified incorrectly as defected:
 
 \begin{equation}
 PF=\frac{FP}{FP+TN}
 \end{equation}
 
-\item G-mean: It can be given by the following equation:
-
 \begin{equation}
 G-mean=\sqrt{PD \times (1-PF)}
 \end{equation}
-
-
-
-
-\end{enumerate}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
