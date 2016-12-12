@@ -28,6 +28,7 @@
 \usepackage{url}
 \usepackage{float}
 \usepackage{subfigure}
+\usepackage{array}
 
 \urldef{\mailsa}\path|{hossam.faris}@ju.edu.jo| 
 \urldef{\mailsc}\path|erika.siebert-cole,}@ju.edu.jo|    
@@ -107,11 +108,34 @@ under consideration and its nearest neighbor. Then it Multiplies the difference 
 \section{Datasets Description}
 \label{data}
 
-CM1: NASA spacecraft instrument
-JM1: Real-time predictive ground system: Uses simulations to generate predictions
-KC1: Storage management for receiving and processing ground
-data
-PC3: Flight software for earth orbiting satellite metadata
+
+\begin{table}
+
+
+\caption{Datasets information}
+
+
+\begin{centering}
+\begin{tabular}{|c|c|>{\centering}p{3cm}|c|c|c|c|c|c|c|}
+\hline 
+Dataset & Lang. & Description & No. of att. & LOC & No. of Mod. & Non-def. & Def. & \% Non-def. & \% Def.\tabularnewline
+\hline 
+\hline 
+CM1 & C & NASA spacecraft instrument & 22 & 20K & 498 & 449 & 49 & 90.16 & 9.83\tabularnewline
+\hline 
+KC1 & C++ & System implementing storage management for receiving and processing
+ground data & 22 & 43K & 2109 & 1783 & 326 & 84.54 & 15.45\tabularnewline
+\hline 
+JM1 & C & Real-time predictive ground system: Uses simulations to generate predictions & 22 & 315K & 10885 & 8779 & 2106 & 80.65 & 19.35\tabularnewline
+\hline 
+PC3 & C & Flight software for earth orbiting satellite metadata & 38 & 40K & 1563 & 1403 & 160 & 89.7 & 10.23\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+
+\end{table}
+
+
 
 
 \section{Model evaluation}
@@ -146,6 +170,9 @@ PF=\frac{FP}{FP+TN}
 \begin{equation}
 G-mean=\sqrt{PD \times (1-PF)}
 \end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
