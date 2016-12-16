@@ -92,9 +92,9 @@ Software defect prediction, which predicts defective software modules, can help 
 
 \section{Related work}
 
-During the last two decades, software defect prediction problem became one of the noteworthy research topic, and increasingly taking great interest from researchers. Many software defect prediction techniques have been developed and applied such as Neural Network \cite{quah2003application}, Support Vector Machine \cite{elish2008predicting}, Naïve Bayes \cite{menzies2007data}, Genetic Programming \cite{evett1998gp}, Particle Swarm Optimization cite{de2010symbolic}, Ant Colony Optimization cite{vandecruys2008mining}, Random Forest \cite{koru2005building}, Case Based Reasoning \cite{el2001comparing}, Logistic Regression \cite{suffian2014prediction}, Decision Trees \cite{koprinska2007learning}, Fuzzy Logic cite{ yuan2000application}, Association Rule Mining cite{czibula2014software}, and the Artificial Immune Systems (AISs) \cite{catal2007software2,catal2007software,catal2008fault}. 
+During the last two decades, software defect prediction problem became one of the noteworthy research topic, and increasingly taking great interest from researchers. Many software defect prediction techniques have been developed and applied such as Neural Network \cite{quah2003application}, Support Vector Machine \cite{elish2008predicting}, Naïve Bayes \cite{menzies2007data}, Genetic Programming \cite{evett1998gp}, Particle Swarm Optimization \cite{de2010symbolic}, Ant Colony Optimization cite{vandecruys2008mining}, Random Forest \cite{koru2005building}, Case Based Reasoning \cite{el2001comparing}, Logistic Regression \cite{suffian2014prediction}, Decision Trees \cite{koprinska2007learning}, Fuzzy Logic \cite{yuan2000application}, Association Rule Mining \cite{czibula2014software}, and the Artificial Immune Systems (AISs) \cite{catal2007software2,catal2007software,catal2008fault}. 
 
-The usage of machine learning algorithms has increased in the last decade and still one the most popular methods for fault prediction \cite{catal2011practical}. Challagulla et al. cite{challagulla2008empirical} conducted an empirical assessment to evaluate the performance of various machine learning techniques and statistical models for predicting software quality. Catal and Diri \cite{catal2009investigating} investigated the effects of data size, metrics, and the feature selection techniques on software fault prediction. Ms. Kaur and Ms. Pallavi \cite{kaur2013data} discussed the utilization of numerous machine learning approaches for example association mining, classification and clustering in software defect prediction but did not provide the comparative performance analysis of techniques. Kumar and Gopal cite{kumar2009least} proposed a binary classifier referred as LSTSVM which is the Least Square variant of Twin Support Vector Machine. Agrawal and Tumar \cite{agarwal2014feature} proposed a feature selection based on LSTSVM model for software defect prediction. Again, Tumar and Agrawal \cite{tomar2016prediction}developed software defect prediction system using a weighted LSTSVM to consider misclassification cost of defective software modules. Shukla and Verma \cite{shuklareview}reviewed and analyzed various literature on defect prediction area, investigated about recent advancement in this area and drew various conclusions. Dwivedi and Singh \cite{kumarsoftware} analyzed and compared various data mining classification and prediction techniques such as Neural Network, Naïve Bayes, and k-Nearest Neighbour for software defect prediction model. Wang et al, \cite{wang2016automatically} proposed to leverage the directly learned semantic features to build machine learning models for predicting defects.
+The usage of machine learning algorithms has increased in the last decade and still one the most popular methods for fault prediction \cite{catal2011practical}. Challagulla et al. \cite{challagulla2008empirical} conducted an empirical assessment to evaluate the performance of various machine learning techniques and statistical models for predicting software quality. Catal and Diri \cite{catal2009investigating} investigated the effects of data size, metrics, and the feature selection techniques on software fault prediction. Ms. Kaur and Ms. Pallavi \cite{kaur2013data} discussed the utilization of numerous machine learning approaches for example association mining, classification and clustering in software defect prediction but did not provide the comparative performance analysis of techniques. Kumar and Gopal cite{kumar2009least} proposed a binary classifier referred as LSTSVM which is the Least Square variant of Twin Support Vector Machine. Agrawal and Tumar \cite{agarwal2014feature} proposed a feature selection based on LSTSVM model for software defect prediction. Again, Tumar and Agrawal \cite{tomar2016prediction}developed software defect prediction system using a weighted LSTSVM to consider misclassification cost of defective software modules. Shukla and Verma \cite{shuklareview}reviewed and analyzed various literature on defect prediction area, investigated about recent advancement in this area and drew various conclusions. Dwivedi and Singh \cite{kumarsoftware} analyzed and compared various data mining classification and prediction techniques such as Neural Network, Naïve Bayes, and k-Nearest Neighbour for software defect prediction model. Wang et al, \cite{wang2016automatically} proposed to leverage the directly learned semantic features to build machine learning models for predicting defects.
 
 
 \section{Ensemble classifiers}
@@ -258,88 +258,118 @@ G-mean=\sqrt{PD \times (1-PF)}
 \section{Experiments and Results}
 \label{experiments}
 
+The experiments are conducted on three stages; at first three basic classifiers commonly used in literature are applied and evaluated on the investigated datasets. The classifiers are Naive Bayes (NB), Multilayer Perceptron (MLP) and the C4.5 decision trees. We used the J48 implementation of C4.5 which is available in Weka. In the second stage the ensemble classifiers including RF, Bagging and Adaboosts are applied. Finally, in third stage the hybrid approach of SMOTE combined with best ensemble method in the previous stage is applied and evaluated.
+
+All algorithms in our experiments are applied based on a 10 folds cross-validation as a training and testing methodology. The algorithms are evaluated using the evaluation criteria described in the previous section. As can be seen in Figure  \ref{fig:basic}, evaluation results of basic classifiers show that J48 DT obtained better results compared to MLP in terms of PD and G-mean for all datasets. While NB tend to give higher FP ratse which makes it worst. 
 
 
+
+\begin{figure}[h]
+\label{fig:ss}
+\begin{center}
+\includegraphics[scale=0.6]{basicresults.eps}
+\caption{Evaluation results of basic classifiers.}
+\end{center}
+\label{fig:basic}
+\end{figure}
+
+
+In the second stage of the experiments, the ensemble classifiers RF, Bagging and Adaboost are applied in attempt to improve the defect detection rates. For Bagging and Adaboost, a base classifier must be selected. In our experiments, J48 is selected to be a base classifier for these two ensembles for three reasons: first due to their good performance compared to NV and MLP networks in the previous stage, second they are much faster to build than the training MLP networks, third it is known that it is preferable to utilize learning algorithms as base classifiers that their trained model will be highly affected by any change in the training data. 
+
+Number of iterations ensemble learners could highly affect their performance. Therefore, all ensembles are experimented using different number of iterations starting from 10 up to 100 iterations with a step of 10 iterations increased in each experiment. The best performance of Bagging is obtained with 10 iterations for all datasets. For Adaboost it was obtained with 10 iterations for PC3 and JM1, and 20 iterations for CM1 and KC1. For RF, the best results are obtained with 30,50, 60 and 80 for CM1, PC3, JM1 and KC1, respectively. Evaluation results of best ensembles models compared to J48 which was the best in the previous stage are shown in the Figure \ref{fig:ensembles}. It can be seen that Adaboost obtained best results compared to the other classifiers with a noticeable improvement in G-mean and PD rates and very competitive low FP rates.
+
+\begin{figure}[h]
+\label{fig:ss}
+\begin{center}
+\includegraphics[scale=0.7]{Ensembles.eps}
+\caption{Evaluation results of Ensemble classifiers.}
+\end{center}
+\label{fig:ensembles}
+\end{figure}
+
+%selection of base classifier
+% tunining number of iterations 
+% tunning SMOTE %
  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure*}[http]
-	\scalebox{0.75}{
-		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
-			\centering
-			
-			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
-			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{RF-CM1}}& &
-			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{RF-JM1}}
+%\begin{figure*}[http]
+%	\scalebox{0.75}{
+%		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
+%			\centering
+%			
+%			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
+%			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{RF-CM1}}& &
+%			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{RF-JM1}}
+%
+%			\vspace{-1.5in}
+%			\\
+%			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{RF-KC1}}& &
+%			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{RF-PC3}}
+%
+%			\vspace{-1.5in}
+%			\\
+%%				
+%		\end{tabular}
+%	}
+%	\caption{Evaluation results of RF by changing number of iterations.}
+%	\label{fig:bestneurons}
+%	\vspace{-0.0in}
+%\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{figure*}[http]
+%	\scalebox{0.75}{
+%		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
+%			\centering
+%			
+%			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
+%			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-CM1}}& &
+%			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-JM1}}
+%
+%			\vspace{-1.5in}
+%			\\
+%			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-KC1}}& &
+%			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-PC3}}
+%
+%			\vspace{-1.5in}
+%			\\
+%%				
+%		\end{tabular}
+%	}
+%	\caption{Evaluation results of Bagging by changing number of iterations.}
+%	\label{fig:bestneurons}
+%	\vspace{-0.0in}
+%\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{figure*}[http]
+%	\scalebox{0.75}{
+%		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
+%			\centering
+%			
+%			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
+%			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-CM1}}& &
+%			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-JM1}}
+%
+%			\vspace{-1.5in}
+%			\\
+%			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-KC1}}& &
+%			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-PC3}}
+%
+%			\vspace{-1.5in}
+%			\\
+%%				
+%		\end{tabular}
+%	}
+%	\caption{Evaluation results of AdaBoost by changing number of iterations.}
+%	\label{fig:bestneurons}
+%	\vspace{-0.0in}
+%\end{figure*}
 
-			\vspace{-1.5in}
-			\\
-			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{RF-KC1}}& &
-			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{RF-PC3}}
-
-			\vspace{-1.5in}
-			\\
-%				
-		\end{tabular}
-	}
-	\caption{Evaluation results of RF by changing number of iterations.}
-	\label{fig:bestneurons}
-	\vspace{-0.0in}
-\end{figure*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure*}[http]
-	\scalebox{0.75}{
-		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
-			\centering
-			
-			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
-			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-CM1}}& &
-			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-JM1}}
-
-			\vspace{-1.5in}
-			\\
-			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-KC1}}& &
-			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-PC3}}
-
-			\vspace{-1.5in}
-			\\
-%				
-		\end{tabular}
-	}
-	\caption{Evaluation results of Bagging by changing number of iterations.}
-	\label{fig:bestneurons}
-	\vspace{-0.0in}
-\end{figure*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[http]
-	\scalebox{0.75}{
-		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
-			\centering
-			
-			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
-			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-CM1}}& &
-			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-JM1}}
-
-			\vspace{-1.5in}
-			\\
-			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-KC1}}& &
-			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-PC3}}
-
-			\vspace{-1.5in}
-			\\
-%				
-		\end{tabular}
-	}
-	\caption{Evaluation results of AdaBoost by changing number of iterations.}
-	\label{fig:bestneurons}
-	\vspace{-0.0in}
-\end{figure*}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[http]
+\begin{figure*}[httb]
 	\scalebox{0.75}{
 		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
 			\centering
@@ -364,12 +394,8 @@ G-mean=\sqrt{PD \times (1-PF)}
 \end{figure*}
 
 
-\begin{table}
-
-
+\begin{table}[httb]
 \caption{Evaluation results for PC3 dataset}
-
-
 \begin{centering}
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline 
@@ -395,7 +421,7 @@ SMOTE+AdaBoost & 0.8772 & 0.0645 & 0.3656 & 0.5748 & 0.8106\tabularnewline
 \end{table}
 
 
-\begin{table}
+\begin{table}[httb]
 \caption{Evaluation results for KC1 dataset}
 \begin{centering}
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -422,7 +448,7 @@ SMOTE+AdaBoost & 0.8329 & 0.0957 & 0.4424 & 0.6294 & 0.7700\tabularnewline
 \end{table}
 
 
-\begin{table}
+\begin{table}[httb]
 \caption{Evaluation results for CM1 dataset}
 \begin{centering}
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -448,7 +474,7 @@ SMOTE+AdaBoost & 0.8536 & 0.0762 & 0.2110 & 0.3585 & 0.7100\tabularnewline
 \par\end{centering}
 \end{table}
 
-\begin{table}
+\begin{table}[httb]
 \caption{Evaluation results for JM1 dataset}
 \begin{centering}
 \begin{tabular}{|c|c|c|c|c|c|}
