@@ -167,15 +167,17 @@ under consideration and its nearest neighbor. Then it Multiplies the difference 
 
 \section{Hybrid SMOTE-Ensemble approach}
 
- 
+As mentioned earlier, most of the collected and available datasets used to predict software defects are highly imbalanced. This makes it more difficult for common classification algorithms to detect the rare and small classes. In machine learning literature, there are different approaches proposed for handling the challenge of imbalance class distribution. Two major approaches are by using ensemble classifiers and by using a data-level approach. The first handles the problem by applying different base classifiers on variations of the training datasets then combines their votes using some predefined mechanism. The second approach is called also an external approach because it preprocess the training dataset using oversampling or undersampling algorithms before applying the classifier. 
+
+In this work, we investigate the application of combining both approaches sequentially in order to boost the performance of the detection rate of software defects. At first, three ensembles (i.e. RF, Adaboost and Bagging) are applied and evaluated. The best performing ensemble classifier is selected to be trained again on an oversampled datasets using the SMOTE algorithms. The hybrid approach is illustrated in Figure \ref{fig:SMOTE+Ensemble}.
  
  \begin{figure}[h]
 \label{fig:ss}
 \begin{center}
 \includegraphics[scale=0.45]{Framework.eps}
-\caption{Hybrid SMOTE-Ensemble approach for bug prediction}
+\caption{Hybrid SMOTE+Ensemble approach for bug prediction}
 \end{center}
-\label{fig:confusion}
+\label{fig:SMOTE+Ensemble}
 \end{figure}
 
 
@@ -276,7 +278,7 @@ All algorithms in our experiments are applied based on a 10 folds cross-validati
 
 In the second stage of the experiments, the ensemble classifiers RF, Bagging and Adaboost are applied in attempt to improve the defect detection rates. For Bagging and Adaboost, a base classifier must be selected. In our experiments, J48 is selected to be a base classifier for these two ensembles for three reasons: first due to their good performance compared to NV and MLP networks in the previous stage, second they are much faster to build than the training MLP networks, third it is known that it is preferable to utilize learning algorithms as base classifiers that their trained model will be highly affected by any change in the training data. 
 
-Number of iterations ensemble learners could highly affect their performance. Therefore, all ensembles are experimented using different number of iterations starting from 10 up to 100 iterations with a step of 10 iterations increased in each experiment. The best performance of Bagging is obtained with 10 iterations for all datasets. For Adaboost it was obtained with 10 iterations for PC3 and JM1, and 20 iterations for CM1 and KC1. For RF, the best results are obtained with 30,50, 60 and 80 for CM1, PC3, JM1 and KC1, respectively. Evaluation results of best ensembles models compared to J48 which was the best in the previous stage are shown in the Figure \ref{fig:ensembles}. It can be seen that Adaboost obtained best results compared to the other classifiers with a noticeable improvement in G-mean and PD rates and very competitive low FP rates.
+Number of iterations in ensemble learners could highly affect their performance. Therefore, all ensembles are experimented using different number of iterations starting from 10 up to 100 iterations with a step of 10 iterations increased in each experiment. The best performance of Bagging is obtained with 10 iterations for all datasets. For Adaboost it was obtained with 10 iterations for PC3 and JM1, and 20 iterations for CM1 and KC1. For RF, the best results are obtained with 30,50, 60 and 80 for CM1, PC3, JM1 and KC1, respectively. Evaluation results of best ensembles models compared to J48 which was the best in the previous stage are shown in the Figure \ref{fig:ensembles}. It can be seen that Adaboost obtained best results compared to the other classifiers with a noticeable improvement in G-mean and PD rates and very competitive low FP rates.
 
 \begin{figure}[h]
 \label{fig:ss}
@@ -286,6 +288,12 @@ Number of iterations ensemble learners could highly affect their performance. Th
 \end{center}
 \label{fig:ensembles}
 \end{figure}
+
+In the last stage of the experiments, we experiment the effect of combining SMOTE with the best ensemble classifier from the previous stage which is Adaboost. In SMOTE there are two different parameters that influence its performance: number of nearest neighbors ($k$) to use and the percentage of SMOTE instances ($P$) to create. For the first parameters, the default number of 5 neighbors is used which was recommended in \cite{chawla2002smote}. While for the second parameter, different percentages are experimented starting from 20\% up to 200\%. Figure \ref{fig:smote+AB} shows the PD, PF and G-mean evaluation values of Adaboost when trained on datasets oversampled by SMOTE with different $P$ values. According this figure the best performance obtained for CM1 and KC1 datasets is at $P$ of 120\% and for JM1 and PC3 datasets is at 180\% and 200\%, perceptively. Finally, the best obtained results of SMOTE combined Adaboost with all other classifiers are shown in Table \ref{table:PC3results}, \ref{table:KC1results}, \ref{table:CM1results} and \ref{table:JM1results}, for PC3, KC1, CM1, JM1 datasets respectively. In JM1 and KC1 datasets, the SMOTE+Adaboost approach managed to achieve best results in terms of PD and G-mean with very competitive low PF rate. For PC3 dataset, we can see that although NB has the best results in terms of PD and G-mean, it has the worst FP rate which is very high at value of 55.89\%. On the other hand, SMOTE+Adaboost comes second with 36.56\%  for PD and 57.48\% for G-mean with low FP rate of 6.45\% which makes more favorable. For CM1, it can be seen that SMOTE enhanced the performance of Adaboost in all criteria but it comes second after NB. 
+
+
+
+
 
 %selection of base classifier
 % tunining number of iterations 
@@ -389,7 +397,7 @@ Number of iterations ensemble learners could highly affect their performance. Th
 		\end{tabular}
 	}
 	\caption{Evaluation results of SMOTE+AdaBoost by changing number of iterations.}
-	\label{fig:bestneurons}
+	\label{fig:smote+AB}
 	\vspace{-0.0in}
 \end{figure*}
 
@@ -418,6 +426,7 @@ SMOTE+AdaBoost & 0.8772 & 0.0645 & 0.3656 & 0.5748 & 0.8106\tabularnewline
 \hline 
 \end{tabular}
 \par\end{centering}
+\label{table:PC3results}
 \end{table}
 
 
@@ -445,6 +454,7 @@ SMOTE+AdaBoost & 0.8329 & 0.0957 & 0.4424 & 0.6294 & 0.7700\tabularnewline
 \hline 
 \end{tabular}
 \par\end{centering}
+\label{table:KC1results}
 \end{table}
 
 
@@ -472,6 +482,7 @@ SMOTE+AdaBoost & 0.8536 & 0.0762 & 0.2110 & 0.3585 & 0.7100\tabularnewline
 \hline 
 \end{tabular}
 \par\end{centering}
+\label{table:CM1results}
 \end{table}
 
 \begin{table}[httb]
@@ -498,6 +509,7 @@ SMOTE+AdaBoost & 0.7787 & 0.1259 & 0.3808 & 0.5764 & 0.6986\tabularnewline
 \hline 
 \end{tabular}
 \par\end{centering}
+\label{table:JM1results}
 \end{table}
 
 
