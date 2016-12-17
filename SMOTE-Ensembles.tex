@@ -79,6 +79,12 @@ Amman, Jordan\\
 
 
 \begin{abstract}
+Software defect prediction is the process of identifying new bugs/defects in software modules.
+ +In recent years, software defect prediction has received a considerable amount of attention from researchers.
+ +Software defect presents an error in a computer program, which is caused by incorrect code or incorrect programming logic. 
+ +As a result, undiscovered defects lead to a poor quality software products. Most of the previous defect detection algorithms are marred by low defect detection ratios. This paper formulates the defect prediction as a classification task, and then examines the impact of several ensembles methods on the classification effectiveness. After that, the best ensemble classifier will be 
+ +selected to be trained again on an over-sampled datasets using the SMOTE algorithms. The results showed that the effectiveness of over sampled algorithms to enhance the defect prediction based on ensembles methods.
+
 \keywords{}
 \end{abstract}
 
@@ -167,9 +173,9 @@ under consideration and its nearest neighbor. Then it Multiplies the difference 
 
 \section{Hybrid SMOTE-Ensemble approach}
 
-As mentioned earlier, most of the collected and available datasets used to predict software defects are highly imbalanced. This makes it more difficult for common classification algorithms to detect the rare and small classes. In machine learning literature, there are different approaches proposed for handling the challenge of imbalance class distribution. Two major approaches are by using ensemble classifiers and by using a data-level approach. The first handles the problem by applying different base classifiers on variations of the training datasets then combines their votes using some predefined mechanism. The second approach is called also an external approach because it preprocess the training dataset using oversampling or undersampling algorithms before applying the classifier. 
+As mentioned earlier, most of the collected and available datasets used to predict software defects are highly imbalanced. This makes it more difficult for common classification algorithms to detect the rare and small classes. In machine learning literature, there are different approaches proposed for handling the challenge of imbalance class distribution. Two major approaches are by using ensemble classifiers and by using a data-level approach. The first handles the problem by applying different base classifiers on variations of the training datasets then combines their votes using some predefined mechanism. The second approach is called also an external approach because it preprocesses the training dataset using oversampling or undersampling algorithms before applying the classifier. 
 
-In this work, we investigate the application of combining both approaches sequentially in order to boost the performance of the detection rate of software defects. At first, three ensembles (i.e. RF, Adaboost and Bagging) are applied and evaluated. The best performing ensemble classifier is selected to be trained again on an oversampled datasets using the SMOTE algorithms. The hybrid approach is illustrated in Figure \ref{fig:SMOTE+Ensemble}.
+In this work, we investigate the application of combining both approaches sequentially in order to boost the performance of the detection rate of software defects. At first, three ensembles (i.e. RF, Adaboost and Bagging) are applied and evaluated. The best performing ensemble classifier is selected to be trained again on an oversampled datasets using the SMOTE algorithms. The hybrid approach is illustrated in Figure \ref{fig:SMOTE+Ensemble}. The task of SMOTE is to create a percentage of new artificial instances from the minority class which is the defects class in our case. It is expected that this process will form a more balanced distribution of the number of instances in each class which consequently could help the classifier taking into account the minority class. After that, the new oversampled dataset will be used to train the ensemble classifier. 
  
  \begin{figure}[h]
 \label{fig:ss}
