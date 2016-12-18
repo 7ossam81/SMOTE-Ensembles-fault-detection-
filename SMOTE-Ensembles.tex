@@ -98,7 +98,7 @@ Software defect prediction is the process of identifying new bugs/defects in sof
 
 Today, the task of developing and delivering a bug-free and high quality software product to the end users is becoming more and more challenging. Delivering high quality software product to the end users is ensured by software reliability and software quality assurance \cite{rawat2012software}. With the rapid growth in size and complexity of today's software, the prediction of software reliability plays a crucial rule in software development process \cite{zheng2009predicting}. According to \cite{hall2012systematic,arisholm2010systematic}, the quality of a software product is highly correlated to the presence or absence of the faults. Software fault  presents in a computer program as an error situation that is caused by wrong specification, incorrect programming logic, lack of programming and testing skills, and so forth \cite{dowd2006art,abaei2014survey,tomar2016prediction}. Defective software module hinders the software from working in the desired manner which further increases the development and maintenance costs and is responsible for customer dissatisfaction \cite{fenton2000software,fenton2014software}.
 
-Software defect prediction, which predicts defective software modules, can help the project manager and the software developers in assessing project progress, planning defect detection activities, evaluating product quality and assessing process performance for software management \cite{clark2001good}. Software defect prediction is very useful for finding bugs and prioritizing testing efforts especially when any company does not have sufficient resources for testing the entire product \cite{abaei2014survey,wang2016automatically}. Researchers and practitioners have applied several statistical and machine learning techniques to predict the fault proneness models and reduce software development and maintenance costs. Among them, the machine learning technique is the most popular \cite{rawat2012software}. The majority of software fault prediction techniques builds models using metrics and faulty data from an earlier deployment or identical objects and then uses the models to predict whether modules presently under development contain defects, which is called supervised learning approaches \cite{abaei2014survey}.
+Software defect prediction, which predicts defective software modules, can help the project manager and the software developers in assessing project progress, planning defect detection activities, evaluating product quality and assessing process performance for software management \cite{clark2001good}. Software defect prediction is very useful for finding bugs and prioritizing testing efforts especially when any company does not have sufficient resources for testing the entire product \cite{abaei2014survey,wang2016automatically}. In this context, researchers and practitioners have applied several statistical and machine learning techniques to predict the fault proneness models and reduce software development and maintenance costs. Among them, the machine learning technique is the most popular \cite{rawat2012software}. The majority of software fault prediction techniques builds models using metrics and faulty data from an earlier deployment or identical objects and then uses the models to predict whether modules presently under development contain defects, which is called supervised learning approaches \cite{abaei2014survey}.
 
 During the last two decades, many supervised software defect prediction techniques have been developed and applied such as Neural Network \cite{quah2003application}, Support Vector Machine \cite{elish2008predicting}, Naïve Bayes \cite{menzies2007data}, Genetic Programming \cite{evett1998gp}, Random Forest \cite{koru2005building}, Logistic Regression \cite{suffian2014prediction}, Decision Trees \cite{koprinska2007learning}, Fuzzy Logic \cite{yuan2000application}, Association Rule Mining \cite{czibula2014software}, and the Artificial Immune Systems (AISs) \cite{catal2007software2,catal2007software,catal2008fault}. 
 
@@ -122,62 +122,26 @@ This paper is structured as follows:.........
 
 \section{Ensemble classifiers}
 \label{ensembles}
-
 The main objective of the classification problem is to find the best hypothesis that produced the best prediction results. In many problem domains, even the well-suited problems, it is very difficult to find a good hypothesis that makes good predictions. In general, keeping many week hypothesis and combine their output is better than selecting the best one.
-Ensemble based techniques, such as Adaboost, random forest and bagging, are widely used in machine learning problems to overcome the diversity of individual classifier results. In this section, we will describe three of the well-known ensemble techniques.
+In this section, we will describe three of the well-known ensemble techniques.
+
 \subsection{Bagging (Bootstrap Aggregation)}
-Bagging is an ensemble technique that is used to improve the classification results by combining the prediction of multiple classification methods \cite{Breiman1996}.
-
-In order to describe the bagging algorithm consider a dataset with N instances and binary class label. The following steps summarized the Bagging algorithm:
-
-\begin{enumerate}
-\item Generate a random training set of size N with replacement from the data.
-\item Train the random training set using any classification technique.
-\item assign a class to each node.
-\item repeat steps 1 to 3  many times.
-\item use voting to predict the class label
-
-\end{enumerate}
-
+Bagging is an ensemble technique that is used to improve the classification results by combining the prediction of multiple classification methods \cite{Breiman1996}. The idea is to generate random training sets with replacement then train these random sets using any classification technique many times. And then, we use voting to predict the class label.
 Bagging works better for unstable  learning algorithm where a small changes in the training set result in large changes in predictions $(i.e, Decision Trees,  Neural Networks)$
 
 \subsection{Random Forests (RF)}
 Random Forest \cite{breiman2001random} is a special case of Bagging where it selects  random features on order to create bootstrap models using Decision Trees. The main idea of Random Forest algorithm is that it develops a large number of decision tree by selecting data and variables randomly.
-Random Forest relies on aggregating the output from many "shallow" trees (called stumps) that are tuned and pruned without much analysis. Some of these trees may have been grown from samples that is the more important feature. Other trees may find completely different features to be relevant.  The idea is that the errors from many "shallow" trees will disappear when aggregated and lead to a more accurate prediction. 
-
-Randomization in Random forest appears in two places:
-\begin{enumerate}
-\item Each tree is trained using a random sample with replacement from training set.
-\item When training individual trees, random subset of features are used for searching for splits. 
-\end{enumerate}
-
-The Randomization reduces the correlations among trees, which improves the predictive performance.
+Random Forest relies on aggregating the output from many "shallow" trees (called stumps) that are tuned and pruned without much analysis. The idea is that the errors from many "shallow" trees will disappear when aggregated and lead to a more accurate prediction.
 
 \subsection{AdaBoost}
 AdaBoost \cite{Schapire2013}, Also known as Adaptive Boosting, is the most well known ensemble technique. Boosting trains model by sequentially training a new simple model based on the errors of the previous models. In other words, we start by discovering the examples that are hard to predict using simple classifiers and focus next classifiers to predict these examples better.
-AdaBoost uses the predictions of $N$ weak classifiers. For a given pattern $x_i$ each classifier $c_j$ can predict the class label of $x_i$ $\in {-1,1}$ and the final prediction is the sign of weighted sum of classifier predictions, where:
-
-\begin{equation}
-C \bigl( x_i)=w_1c_1 \bigl (x_i)+w_2c_2 \bigl (x_i)+...+w_nc_n \bigl (x_i)
-\end{equation}
-
-%= w_1c_1(x_i) + w_2c_2(x_i) + · · · + w_nc_n(x_i)
-
-
-
-Where $c_1 ... c_n$ are the weak classifiers, $w_1 ... w_n$ are the weights assigned to the prediction of each classifier. The weights given to each weak classifier results calculated using the following equation:
-\begin{equation}
-w_m=\frac{1}{2}ln \bigl ( \frac{1-e_m}{e_m}  )
-\end{equation}
-
-where $e_m$  is the percentage rate of error given the weights of the data points.
+AdaBoost uses the predictions of $N$ weak classifiers. For a given pattern $x_i$ each classifier $c_j$ can predict the class label of $x_i$ $\in {-1,1}$ and the final prediction is the sign of weighted sum of classifier predictions
 
 AdaBoost seems to enhance the performance accuracy for two reasons:
 1. The misclassification rate of the final classifier is reduced by combining multiple classifiers that have higher misclassification rate.
 2.  The variance of the final combined classifier is less than the variance of the weak classifiers.
 
 However, increasing the number of iteration will cause an overfitting. The best way to avoid overfitting is to limit the number of iteration.
-
 
 \section{Synthetic minority over-sampling technique (SMOTE)}
 
