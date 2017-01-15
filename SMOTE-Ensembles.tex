@@ -40,7 +40,7 @@
 \mainmatter  % start of an individual contribution
 
 % first the title is needed
-\title{SMOTE+Ensembles for Bug Prediction}
+\title{Hybrid SMOTE-Ensemble Approach for Software Defect Prediction}
 
 % a short form should be given in case it is too long for the running head
 \titlerunning{Lecture Notes in Computer Science: Authors' Instructions}
@@ -79,14 +79,8 @@ Amman, Jordan\\
 
 
 \begin{abstract}
-Software defect prediction is the process of identifying new bugs/defects in software modules.
- +In recent years, software defect prediction has received a considerable amount of attention from researchers.
- +Software defect presents an error in a computer program, which is caused by incorrect code or incorrect programming logic. 
- +As a result, undiscovered defects lead to a poor quality software products. Most of the previous defect detection algorithms are marred by low defect detection ratios. 
- 
- 
- This paper formulates the defect prediction as a classification task, and then examines the impact of several ensembles methods on the classification effectiveness. After that, the best ensemble classifier will be 
- +selected to be trained again on an over-sampled datasets using the SMOTE algorithms. The results showed that the effectiveness of over sampled algorithms to enhance the defect prediction based on ensembles methods.
+Software defect prediction is the process of identifying new bugs/defects in software modules. Software defect presents an error in a computer program, which is caused by incorrect code or incorrect programming logic. As a result, undiscovered defects lead to a poor quality software products. In recent years, software defect prediction has received a considerable amount of attention from researchers. Most of the previous defect detection algorithms are marred by low defect detection ratios. Furthermore, software defect prediction is very challenging problem due to the high imbalanced distribution, where the bug-free codes are much higher than defective ones. In this paper, the software defect prediction problem is formulated as a classification task, and then examines the impact of several ensembles methods on the classification effectiveness. In addition, the best ensemble classifier will be selected to be trained again on an over-sampled datasets using the Synthetic Minority Over-sampling Technique (SMOTE) algorithm to tackle imbalanced distribution problem. The proposed hybrid method is evaluated using four software defects datasets. Experimental results demonstrate that the proposed method can effectively enhance the defect prediction accuracy.
+
  
 
 
@@ -100,7 +94,7 @@ Today, the task of developing and delivering a bug-free and high quality softwar
 
 Software defect prediction, which predicts defective software modules, can help the project manager and the software developers in assessing project progress, planning defect detection activities, evaluating product quality and assessing process performance for software management \cite{clark2001good}. Software defect prediction is very useful for finding bugs and prioritizing testing efforts especially when any company does not have sufficient resources for testing the entire product \cite{abaei2014survey,wang2016automatically}. In this context, researchers and practitioners have applied several statistical and machine learning techniques to predict the fault proneness models and reduce software development and maintenance costs. Among them, the machine learning technique is the most popular \cite{rawat2012software}. The majority of software fault prediction techniques builds models using metrics and faulty data from an earlier deployment or identical objects and then uses the models to predict whether modules presently under development contain defects, which is called supervised learning approaches \cite{abaei2014survey}.
 
-During the last two decades, many supervised software defect prediction techniques have been developed and applied such as Neural Network \cite{quah2003application}, Support Vector Machine \cite{elish2008predicting}, Naïve Bayes \cite{menzies2007data}, Genetic Programming \cite{evett1998gp}, Random Forest \cite{koru2005building}, Logistic Regression \cite{suffian2014prediction}, Decision Trees \cite{koprinska2007learning}, Fuzzy Logic \cite{yuan2000application}, Association Rule Mining \cite{czibula2014software}, and the Artificial Immune Systems (AISs) \cite{catal2007software2,catal2007software,catal2008fault}. 
+During the last two decades, many supervised software defect prediction techniques have been developed and applied such as Neural Network \cite{quah2003application}, Support Vector Machine \cite{elish2008predicting}, Naive Bayes \cite{menzies2007data}, Genetic Programming \cite{evett1998gp}, Random Forest \cite{koru2005building}, Logistic Regression \cite{suffian2014prediction}, Decision Trees \cite{koprinska2007learning}, Fuzzy Logic \cite{yuan2000application}, Association Rule Mining \cite{czibula2014software}, and the Artificial Immune Systems (AISs) \cite{catal2007software,catal2008fault}. 
 
 
 %On the other hand, there are other approaches, i.e. clustering, which do not use previous data; these approaches are called unsupervised learning approaches. It is worth pointing out that some researchers, i.e \cite{koksal2011review}; classify software fault prediction techniques into descriptive and predictive techniques.
@@ -108,7 +102,7 @@ During the last two decades, many supervised software defect prediction techniqu
 %%%%%%%%%%%%%%%%%%%%%%%%
 
  
- From a machine learning point of view the problem is considered very complex and very challenging problem due to the high imbalanced distribution of the classes in the datasets. Where the ratio of normal examples are much higher than the defect ones. In such case, most of conventional and basic classification algorithms tend to classify correctly the major class and ignore the smaller class which in most cases like ours is the important class we are looking for. Consequently this will lead the classifier to poor performance. To tackle this problem, in this paper we proposed a hybrid approach based on the Synthetic minority over-sampling technique (SMOTE) and ensemble classifiers for detecting software defects in different imbalanced datasets.
+ From a machine learning point of view the problem is considered very complex and very challenging problem due to the high imbalanced distribution of the classes in the datasets. Where the ratio of normal examples are much higher than the defect ones. In such case, most of conventional and basic classification algorithms tend to classify correctly the major class and ignore the smaller class, which in most cases like in software defect prediction problem, the defect-prone is the important class. Consequently, this will lead the classifier to poor performance. To tackle this problem, in this paper we proposed a hybrid approach based on the Synthetic Minority Over-Sampling Technique (SMOTE) and ensemble classifiers for detecting software defects in different imbalanced datasets.
  
 %%%%%%%%%%%%%%%%%%%%%%%
 
@@ -134,14 +128,14 @@ Random Forest \cite{breiman2001random} is a special case of Bagging where it sel
 Random Forest relies on aggregating the output from many "shallow" trees (called stumps) that are tuned and pruned without much analysis. The idea is that the errors from many "shallow" trees will disappear when aggregated and lead to a more accurate prediction.
 
 \subsection{AdaBoost}
-AdaBoost \cite{Schapire2013}, Also known as Adaptive Boosting, is the most well known ensemble technique. Boosting trains model by sequentially training a new simple model based on the errors of the previous models. In other words, we start by discovering the examples that are hard to predict using simple classifiers and focus next classifiers to predict these examples better.
-AdaBoost uses the predictions of $N$ weak classifiers. For a given pattern $x_i$ each classifier $c_j$ can predict the class label of $x_i$ $\in {-1,1}$ and the final prediction is the sign of weighted sum of classifier predictions
+AdaBoost \cite{schapire2013}, Also known as Adaptive Boosting, is the most well known ensemble technique. Boosting trains model by sequentially training a new simple model based on the errors of the previous models. In other words, we start by discovering the examples that are hard to predict using simple classifiers and focus next classifiers to predict these examples better.
+AdaBoost uses the predictions of $N$ weak classifiers. For a given pattern $x_i$ each classifier $c_j$ can predict the class label of $x_i$ $\in {-1,1}$ and the final prediction is the sign of weighted sum of classifier predictions.
 
 AdaBoost seems to enhance the performance accuracy for two reasons:
 1. The misclassification rate of the final classifier is reduced by combining multiple classifiers that have higher misclassification rate.
 2.  The variance of the final combined classifier is less than the variance of the weak classifiers.
 
-However, increasing the number of iteration will cause an overfitting. The best way to avoid overfitting is to limit the number of iteration.
+However, increasing the number of iterations will cause an overfitting. The best way to avoid overfitting is to limit the number of iterations.
 
 \section{Synthetic minority over-sampling technique (SMOTE)}
 \label{SMOTTE}
@@ -158,49 +152,39 @@ under consideration and its nearest neighbor. Then it Multiplies the difference 
 
 As mentioned earlier, most of the collected and available datasets used to predict software defects are highly imbalanced. This makes it more difficult for common classification algorithms to detect the rare and small classes. In machine learning literature, there are different approaches proposed for handling the challenge of imbalance class distribution. Two major approaches are by using ensemble classifiers and by using a data-level approach. The first handles the problem by applying different base classifiers on variations of the training datasets then combines their votes using some predefined mechanism. The second approach is called also an external approach because it preprocesses the training dataset using oversampling or undersampling algorithms before applying the classifier. 
 
-In this work, we investigate the application of combining both approaches sequentially in order to boost the performance of the detection rate of software defects. At first, three ensembles (i.e. RF, Adaboost and Bagging) are applied and evaluated. The best performing ensemble classifier is selected to be trained again on an oversampled datasets using the SMOTE algorithms. The hybrid approach is illustrated in Figure \ref{fig:SMOTE+Ensemble}. The task of SMOTE is to create a percentage of new artificial instances from the minority class which is the defects class in our case. This process will form a more balanced distribution of the number of instances in each class which consequently could help the classifier taking into account the minority class. After that, the new oversampled dataset will be used to train the ensemble classifier. It is expected that by creating a percentage of artificial examples similar to the examples that represent the defect cases in the dataset, the defects detection rates of the ensemble classifiers will increase. An important question rises here: how much instances should we create by SMOTE before training our classifiers? To answer this question, an extensive experiment will be conducted as part of the experiments section to study the effect of this ratio.
+In this work, we investigate the application of combining both approaches sequentially in order to boost the performance of the detection rate of software defects. At first, three ensembles (i.e. RF, Adaboost and Bagging) are applied and evaluated. The best performing ensemble classifier is selected to be trained again on an oversampled datasets using the SMOTE algorithms. The hybrid approach is illustrated in Figure \ref{fig:fig1}. The task of SMOTE is to create a percentage of new artificial instances from the minority class which is the defects class in our case. This process will form a more balanced distribution of the number of instances in each class which consequently could help the classifier taking into account the minority class. After that, the new oversampled dataset will be used to train the ensemble classifier. It is expected that by creating a percentage of artificial examples similar to the examples that represent the defect cases in the dataset, the defects detection rates of the ensemble classifiers will increase. An important question rises here: how much instances should we create by SMOTE before training our classifiers? To answer this question, an extensive experiment will be conducted as part of the experiments section to study the effect of this ratio.
  
- \begin{figure}[h]
-\label{fig:ss}
-\begin{center}
-\includegraphics[scale=0.45]{Framework.eps}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.40]{Framework.eps}
 \caption{Hybrid SMOTE+Ensemble approach for bug prediction}
-\end{center}
-\label{fig:SMOTE+Ensemble}
+\label{fig:fig1}
 \end{figure}
 
-
-\section{Datasets Description}
-\label{data}
-
-
-To facilitate the replication and verification of our experiments, four public benchmark datasets from REPOSITORY of NASA were used [1 ,].These datasets were collected from real software projects by NASA which were developed in C/C++ for spacecraft instrumentation (CM1 dataset), storage management of ground data (KC1 dataset), scientific data processing (JM1 dataset), and satellite flight control (PC3 dataset). The buggy rates of the datasets have a minimum value of 9.83\% and a maximum value of 19.35\%. The number of instances of the datasets is different. Each instance in the first three datasets CM1, KC1, and JM1 datasets includes total 22 attributes, of which five are different lines of code measure, three are McCabe metrics, four are base Halstead measures, eight are derived Halstead measures, one is a branch-count, and one is a decision attribute. PC3 is the last dataset and it includes 38 attributes, of which one is a decision attribute. Table 1 shows the detailed information of each dataset.
-
-
-\begin{table}
+\begin{table}[H]
 \caption{Datasets Description}
 \begin{centering}
-\scalebox{0.7}{
-\begin{tabular}{|c|c|p{2.5cm}|c|c|c|c|c|c|c|}
+\scalebox{0.6}{
+\begin{tabular}{c c p{2.5cm} c c c c c c c }
 \hline 
 Dataset & Language & Description & \#Attributes & LOC & \#Modules & \#Non-defects  & \#Defects & \% Non-defects & \% Defects
 \tabularnewline
 \hline 
-\hline 
 CM1 & C & NASA spacecraft instrument & 22 & 20K & 498 & 449 & 49 & 90.16 & 9.83\tabularnewline
-\hline 
 KC1 & C++ & System implementing storage management for receiving and processing
 ground data & 22 & 43K & 2109 & 1783 & 326 & 84.54 & 15.45\tabularnewline
-\hline 
 JM1 & C & Real-time predictive ground system: Uses simulations to generate predictions & 22 & 315K & 10885 & 8779 & 2106 & 80.65 & 19.35\tabularnewline
-\hline 
 PC3 & C & Flight software for earth orbiting satellite metadata & 38 & 40K & 1563 & 1403 & 160 & 89.7 & 10.23\tabularnewline
 \hline 
 \end{tabular}}
 \par\end{centering}
-
+\label{table:data}
 \end{table}
 
+\section{Datasets Description}
+\label{data}
+To facilitate the replication and verification of our experiments, four public benchmark datasets \cite{data6464273} from PROMISE Repository \footnote{http://openscience.us/repo/} were used. These datasets were collected from real software projects by NASA which were developed in C/C++ for spacecraft instrumentation (CM1 dataset), storage management of ground data (KC1 dataset), scientific data processing (JM1 dataset), and satellite flight control (PC3 dataset). The buggy rates of the datasets have a minimum value of 9.83\% and a maximum value of 19.35\%. The number of instances of the datasets is different. Each instance in the first three datasets CM1, KC1, and JM1 datasets includes total 22 attributes, of which five are different lines of code measures, three are McCabe metrics, four are base Halstead measures, eight are derived Halstead measures, one is a branch-count, and one is a decision attribute. PC3 is the last dataset and it includes 38 attributes, of which one is a decision attribute. Table \ref{table:data} shows the detailed information of each dataset.
 
 
 
@@ -208,22 +192,22 @@ PC3 & C & Flight software for earth orbiting satellite metadata & 38 & 40K & 156
 \label{evaluation_criteria}
 In order to evalute the performance of the software faults prediction model, we used the confusion matrix that shown in Figure \ref{fig:confusion}, which is a table that is often used to describe the classfication model results. 
 
-\begin{figure}[h]
-\label{fig:ss}
-\begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics[scale=0.5]{confusion-matrix.eps}
 \caption{Confusion matrix}
-\end{center}
 \label{fig:confusion}
 \end{figure}
 
 The bug detection effectiveness is evaluated using four measurements based on the previous confusion matrix; namely, Model Accuracy (Acc), Number of Predicted Defects (PD), Numebr of Incorectly Predicted cases with No Defects (PF), G-mean. Acc is the ratio of the correctly predicted faults to the total number of faults. PD is
 the ratio of correctly predicted faults to the total number of faults. PF is the number of not fault-prone modules that are predicted incorrectly as defectes. In addtion, we used the G-mean to combine the PD and PF which is a good indicator of the relationship between the two measures. The PD, PF, G-mean are calculated in Equations \ref{accuracy}, \ref{PD}, \ref{PF}, and \ref{gmean}, respectively.
 
+\begin{small}
 \begin{equation}
 Accuracy=\frac{TP+TN}{TP + FN + FP + TN}
 \label{accuracy}
 \end{equation}
+
 
 \begin{equation}
 PD=\frac{TP}{TP+FN}
@@ -239,7 +223,7 @@ PF=\frac{FP}{FP+TN}
 G-mean=\sqrt{PD \times (1-PF)}
 \label{gmean}
 \end{equation}
-
+\end{small}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -251,136 +235,49 @@ G-mean=\sqrt{PD \times (1-PF)}
 
 The experiments are conducted on three stages; at first three basic classifiers commonly used in literature are applied and evaluated on the investigated datasets. The classifiers are Naive Bayes (NB), Multilayer Perceptron (MLP) and the C4.5 decision trees. We used the J48 implementation of C4.5 which is available in Weka. In the second stage the ensemble classifiers including RF, Bagging and Adaboosts are applied. Finally, in third stage the hybrid approach of SMOTE combined with best ensemble method in the previous stage is applied and evaluated.
 
-All algorithms in our experiments are applied based on a 10 folds cross-validation as a training and testing methodology. The algorithms are evaluated using the evaluation criteria described in the previous section. As can be seen in Figure  \ref{fig:basic}, evaluation results of basic classifiers show that J48 DT obtained better results compared to MLP in terms of PD and G-mean for all datasets. While NB tend to give higher FP ratse which makes it worst. 
+All algorithms in our experiments are applied based on a 10 folds cross-validation as a training and testing methodology. The algorithms are evaluated using the evaluation criteria described in the previous section. As can be seen in Figure  \ref{fig:basic}, evaluation results of basic classifiers show that J48 obtained better results compared to MLP in terms of PD and G-mean for all datasets. While NB tend to give higher FP rates which makes it worst. 
 
 
 
 \begin{figure}[h]
-\label{fig:ss}
-\begin{center}
+\centering
 \includegraphics[scale=0.6]{basicresults.eps}
 \caption{Evaluation results of basic classifiers.}
-\end{center}
 \label{fig:basic}
 \end{figure}
 
 
-In the second stage of the experiments, the ensemble classifiers RF, Bagging and Adaboost are applied in attempt to improve the defect detection rates. For Bagging and Adaboost, a base classifier must be selected. In our experiments, J48 is selected to be a base classifier for these two ensembles for three reasons: first due to their good performance compared to NV and MLP networks in the previous stage, second they are much faster to build than the training MLP networks, third it is known that it is preferable to utilize learning algorithms as base classifiers that their trained model will be highly affected by any change in the training data. 
+In the second stage of the experiments, the ensemble classifiers RF, Bagging and Adaboost are applied in attempt to improve the defect detection rates. For Bagging and Adaboost, a base classifier must be selected. In our experiments, J48 is selected to be a base classifier for these two ensembles for three reasons: first due to their good performance compared to NB and MLP networks in the previous stage, second they are much faster to build than the training MLP networks, third it is known that it is preferable to utilize learning algorithms as base classifiers that their trained model will be highly affected by any change in the training data. 
 
 Number of iterations in ensemble learners could highly affect their performance. Therefore, all ensembles are experimented using different number of iterations starting from 10 up to 100 iterations with a step of 10 iterations increased in each experiment. The best performance of Bagging is obtained with 10 iterations for all datasets. For Adaboost it was obtained with 10 iterations for PC3 and JM1, and 20 iterations for CM1 and KC1. For RF, the best results are obtained with 30,50, 60 and 80 for CM1, PC3, JM1 and KC1, respectively. Evaluation results of best ensembles models compared to J48 which was the best in the previous stage are shown in the Figure \ref{fig:ensembles}. It can be seen that Adaboost obtained best results compared to the other classifiers with a noticeable improvement in G-mean and PD rates and very competitive low FP rates.
 
-\begin{figure}[h]
-\label{fig:ss}
-\begin{center}
-\includegraphics[scale=0.7]{Ensembles.eps}
+\begin{figure*}[h]
+\centering
+\includegraphics[scale=0.6]{Ensembles.eps}
 \caption{Evaluation results of Ensemble classifiers.}
-\end{center}
 \label{fig:ensembles}
-\end{figure}
-
-In the last stage of the experiments, we experiment the effect of combining SMOTE with the best ensemble classifier from the previous stage which is Adaboost. In SMOTE there are two different parameters that influence its performance: number of nearest neighbors ($k$) to use and the percentage of SMOTE instances ($P$) to create. For the first parameters, the default number of 5 neighbors is used which was recommended in \cite{chawla2002smote}. While for the second parameter, different percentages are experimented starting from 20\% up to 200\%. Figure \ref{fig:smote+AB} shows the PD, PF and G-mean evaluation values of Adaboost when trained on datasets oversampled by SMOTE with different $P$ values. According this figure the best performance obtained for CM1 and KC1 datasets is at $P$ of 120\% and for JM1 and PC3 datasets is at 180\% and 200\%, perceptively. Finally, the best obtained results of SMOTE combined Adaboost with all other classifiers are shown in Table \ref{table:PC3results}, \ref{table:KC1results}, \ref{table:CM1results} and \ref{table:JM1results}, for PC3, KC1, CM1, JM1 datasets respectively. In JM1 and KC1 datasets, the SMOTE+Adaboost approach managed to achieve best results in terms of PD and G-mean with very competitive low PF rate. For PC3 dataset, we can see that although NB has the best results in terms of PD and G-mean, it has the worst FP rate which is very high at value of 55.89\%. On the other hand, SMOTE+Adaboost comes second with 36.56\%  for PD and 57.48\% for G-mean with low FP rate of 6.45\% which makes more favorable. For CM1, it can be seen that SMOTE enhanced the performance of Adaboost in all criteria but it comes second after NB. 
+\end{figure*}
 
 
+In the last stage of the experiments, we experiment the effect of combining SMOTE with the best ensemble classifier from the previous stage which is Adaboost. In SMOTE there are two different parameters that influence its performance: number of nearest neighbors ($k$) to use and the percentage of SMOTE instances ($P$) to create. For the first parameters, the default number of 5 neighbors is used which was recommended in \cite{chawla2002smote}. While for the second parameter, different percentages are experimented starting from 20\% up to 200\%. Figure \ref{fig:smote+AB} shows the PD, PF and G-mean evaluation values of Adaboost when trained on datasets oversampled by SMOTE with different $P$ values. According this figure the best performance obtained for CM1 and KC1 datasets is at $P$ of 120\% and for JM1 and PC3 datasets is at 180\% and 200\%, respectively.
 
 
-
-%selection of base classifier
-% tunining number of iterations 
-% tunning SMOTE %
  
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{figure*}[http]
-%	\scalebox{0.75}{
-%		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
-%			\centering
-%			
-%			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
-%			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{RF-CM1}}& &
-%			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{RF-JM1}}
-%
-%			\vspace{-1.5in}
-%			\\
-%			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{RF-KC1}}& &
-%			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{RF-PC3}}
-%
-%			\vspace{-1.5in}
-%			\\
-%%				
-%		\end{tabular}
-%	}
-%	\caption{Evaluation results of RF by changing number of iterations.}
-%	\label{fig:bestneurons}
-%	\vspace{-0.0in}
-%\end{figure*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%\begin{figure*}[http]
-%	\scalebox{0.75}{
-%		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
-%			\centering
-%			
-%			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
-%			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-CM1}}& &
-%			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-JM1}}
-%
-%			\vspace{-1.5in}
-%			\\
-%			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-KC1}}& &
-%			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{Bagging-PC3}}
-%
-%			\vspace{-1.5in}
-%			\\
-%%				
-%		\end{tabular}
-%	}
-%	\caption{Evaluation results of Bagging by changing number of iterations.}
-%	\label{fig:bestneurons}
-%	\vspace{-0.0in}
-%\end{figure*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%\begin{figure*}[http]
-%	\scalebox{0.75}{
-%		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
-%			\centering
-%			
-%			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
-%			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-CM1}}& &
-%			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-JM1}}
-%
-%			\vspace{-1.5in}
-%			\\
-%			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-KC1}}& &
-%			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{AdaBoost-PC3}}
-%
-%			\vspace{-1.5in}
-%			\\
-%%				
-%		\end{tabular}
-%	}
-%	\caption{Evaluation results of AdaBoost by changing number of iterations.}
-%	\label{fig:bestneurons}
-%	\vspace{-0.0in}
-%\end{figure*}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[httb]
-	\scalebox{0.75}{
-		\begin{tabular}{p{5cm} p{4cm} p{5cm} }
+\begin{figure*}[h]
+	\scalebox{0.6}{
+		\begin{tabular}{p{2cm} p{5cm} p{4cm} p{5cm} }
 			\centering
 			
-			%\subfigure[Appendicitis]{\label{fig:a}\includegraphics[scale=0.40]{appendicitis}}& &
-			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{SMOTE-AdaBoost-CM1}}& &
+&			\subfigure[CM1]{\label{fig:a}\includegraphics[scale=0.45]{SMOTE-AdaBoost-CM1}}& &
 			\subfigure[JM1]{\label{fig:a}\includegraphics[scale=0.45]{SMOTE-AdaBoost-JM1}}
 
-			\vspace{-1.5in}
+			\vspace{-1.0in}
 			\\
-			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{SMOTE-AdaBoost-KC1}}& &
+&			\subfigure[KC1]{\label{fig:a}\includegraphics[scale=0.45]{SMOTE-AdaBoost-KC1}}& &
 			\subfigure[PC3]{\label{fig:a}\includegraphics[scale=0.45]{SMOTE-AdaBoost-PC3}}
 
-			\vspace{-1.5in}
+			\vspace{-1.0in}
 			\\
 %				
 		\end{tabular}
@@ -391,112 +288,93 @@ In the last stage of the experiments, we experiment the effect of combining SMOT
 \end{figure*}
 
 
-\begin{table}[httb]
+
+Finally, the best obtained results of SMOTE combined Adaboost with all other classifiers are shown in Table \ref{table:PC3results}, \ref{table:KC1results}, \ref{table:CM1results} and \ref{table:JM1results}, for PC3, KC1, CM1, JM1 datasets respectively. In JM1 and KC1 datasets, the SMOTE+Adaboost approach managed to achieve best results in terms of PD and G-mean with very competitive low PF rate. For PC3 dataset, we can see that although NB has the best results in terms of PD and G-mean, it has the worst FP rate which is very high at value of 55.89\%. On the other hand, SMOTE+Adaboost comes second with 36.56\%  for PD and 57.48\% for G-mean with low FP rate of 6.45\% which makes more favorable. For CM1, it can be seen that SMOTE enhanced the performance of Adaboost in all criteria but it comes second after NB. 
+
+
+
+\begin{table}[h]
 \caption{Evaluation results for PC3 dataset}
 \begin{centering}
-\begin{tabular}{|c|c|c|c|c|c|}
+\scalebox{0.7}{
+\begin{tabular}{l c c c c c }
 \hline 
  & Accuracy & PF & PD & G-mean & AUC\tabularnewline
 \hline 
-\hline 
 NB & 0.4826 & 0.5589 & 0.8469 & 0.6112 & 0.7668\tabularnewline
-\hline 
 J48 & 0.8814 & 0.0418 & 0.2081 & 0.4466 & 0.6304\tabularnewline
-\hline 
 MLP & 0.8820 & 0.0378 & 0.1788 & 0.4147 & 0.7812\tabularnewline
-\hline 
 RF & 0.9018 & 0.0149 & 0.1713 & 0.4107 & 0.8418\tabularnewline
-\hline 
 Bagging & 0.8912 & 0.0247 & 0.1531 & 0.3865 & 0.8195\tabularnewline
-\hline 
 AdaBoost & 0.8869 & 0.0433 & 0.2750 & 0.5129 & 0.8031\tabularnewline
-\hline 
 SMOTE+AdaBoost & 0.8772 & 0.0645 & 0.3656 & 0.5748 & 0.8106\tabularnewline
 \hline 
-\end{tabular}
+\end{tabular}}
 \par\end{centering}
 \label{table:PC3results}
 \end{table}
 
 
-\begin{table}[httb]
+\begin{table}[h]
 \caption{Evaluation results for KC1 dataset}
 \begin{centering}
-\begin{tabular}{|c|c|c|c|c|c|}
+\scalebox{0.7}{
+\begin{tabular}{l c c c c c}
 \hline 
  & Accuracy & PF & PD & G-mean & AUC\tabularnewline
 \hline 
-\hline 
 NB & 0.8246 & 0.0925 & 0.3715 & 0.5806 & 0.7909\tabularnewline
-\hline 
 J48 & 0.8404 & 0.0601 & 0.2964 & 0.5278 & 0.6963\tabularnewline
-\hline 
 MLP & 0.8565 & 0.0229 & 0.1963 & 0.4380 & 0.7852\tabularnewline
-\hline 
 RF & 0.8610 & 0.0402 & 0.3208 & 0.5548 & 0.8252\tabularnewline
-\hline 
 Bagging & 0.8582 & 0.0434 & 0.3200 & 0.5533 & 0.8123\tabularnewline
-\hline 
 AdaBoost & 0.8438 & 0.0665 & 0.3534 & 0.5743 & 0.7477\tabularnewline
-\hline 
 SMOTE+AdaBoost & 0.8329 & 0.0957 & 0.4424 & 0.6294 & 0.7700\tabularnewline
 \hline 
-\end{tabular}
+\end{tabular}}
 \par\end{centering}
 \label{table:KC1results}
 \end{table}
 
 
-\begin{table}[httb]
+\begin{table}[h]
 \caption{Evaluation results for CM1 dataset}
 \begin{centering}
-\begin{tabular}{|c|c|c|c|c|c|}
+\scalebox{0.7}{
+\begin{tabular}{l c c c c c}
 \hline 
  & Accuracy & PF & PD & G-mean & AUC\tabularnewline
 \hline 
-\hline 
 NB & 0.8484 & 0.0918 & 0.2985 & 0.5207 & 0.7382\tabularnewline
-\hline 
 J48 & 0.8805 & 0.0294 & 0.0550 & 0.2310 & 0.5591\tabularnewline
-\hline 
 MLP & 0.8825 & 0.0256 & 0.0400 & 0.1974 & 0.7586\tabularnewline
-\hline 
 RF & 0.8920 & 0.0165 & 0.0525 & 0.2272 & 0.7430\tabularnewline
-\hline 
 Bagging & 0.8865 & 0.0234 & 0.0610 & 0.2441 & 0.7290\tabularnewline
-\hline 
 AdaBoost & 0.8743 & 0.0468 & 0.1510 & 0.3794 & 0.6977\tabularnewline
-\hline 
 SMOTE+AdaBoost & 0.8536 & 0.0762 & 0.2110 & 0.3585 & 0.7100\tabularnewline
 \hline 
-\end{tabular}
+\end{tabular}}
 \par\end{centering}
 \label{table:CM1results}
 \end{table}
 
-\begin{table}[httb]
+\begin{table}[H]
 \caption{Evaluation results for JM1 dataset}
 \begin{centering}
-\begin{tabular}{|c|c|c|c|c|c|}
+\scalebox{0.7}{
+\begin{tabular}{l c c c c c}
 \hline 
  & Accuracy & PF & PD & G-mean & AUC\tabularnewline
 \hline 
-\hline 
 NB & 0.8042 & 0.0507 & 0.1993 & 0.4350 & 0.6901\tabularnewline
-\hline 
 J48 & 0.7973 & 0.0688 & 0.2394 & 0.4722 & 0.6677\tabularnewline
-\hline 
 MLP & 0.8100 & 0.0148 & 0.0799 & 0.2806 & 0.7050\tabularnewline
-\hline 
 RF & 0.8167 & 0.0450 & 0.2402 & 0.4789 & 0.7527\tabularnewline
-\hline 
 Bagging & 0.8118 & 0.0511 & 0.2406 & 0.4778 & 0.7280\tabularnewline
-\hline 
 AdaBoost & 0.7912 & 0.0958 & 0.3199 & 0.5378 & 0.6951\tabularnewline
-\hline 
 SMOTE+AdaBoost & 0.7787 & 0.1259 & 0.3808 & 0.5764 & 0.6986\tabularnewline
 \hline 
-\end{tabular}
+\end{tabular}}
 \par\end{centering}
 \label{table:JM1results}
 \end{table}
@@ -506,6 +384,10 @@ SMOTE+AdaBoost & 0.7787 & 0.1259 & 0.3808 & 0.5764 & 0.6986\tabularnewline
 \section{Conclusions}
 \label{conclusion}
 
+Delivering high quality software products on time within budgetary cost is crucial issue for the success of software companies. In order to help software developers in undertaking this issue, an attempt has been made in this paper for software defect prediction.
+
+This paper formulates the software defect prediction problem as a classification task. It further investigates the impact of several
+ensemble methods to solve the defect prediction problem. Specifically, we have developed a hybrid ensemble classification based on over-sampled approach for detecting software defects in different imbalanced datasets. High imbalanced distribution of classes in datasets deteriorates the performance of classification approaches. The proposed approach is developed based on the Synthetic Minority Over-sampling Technique (SMOTE). The experiments have shown that the proposed SMOTE+Ensembles approach has better quality results than the other classification algorithms. Our future research will include the verification of the proposed method on other datasets.
 
 
 
