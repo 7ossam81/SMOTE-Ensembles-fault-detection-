@@ -31,9 +31,17 @@
 \usepackage{array}
 
 \urldef{\mailsa}\path|{h.sawalqah,hossam.faris,i.aljarah,l.nemer}@ju.edu.jo| 
-\urldef{\mailsc}\path|erika.siebert-cole,}@ju.edu.jo|    
+\urldef{\mailsc}\path|hindawi@jadara.edu.jo|    
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
 \noindent\keywordname\enspace\ignorespaces#1}
+
+
+%mail: hindawi@jadara.edu.jo
+%Nouh Alhindawi
+%Jadara University, Irbid, Jordan
+%Faculty of Sciences and Information Technology
+%Department of Software Engineering
+
 
 \begin{document}
 
@@ -51,7 +59,7 @@
 % their surnames. This ensures that the names appear correctly in
 % the running heads and the author index.
 %
-\author{ Hamad Alsawalqah  \and Hossam Faris \and Ibrahim Aljarah \and Loai Alnemer}%
+\author{ Hamad Alsawalqah$^1$  \and Hossam Faris$^1$ \and Ibrahim Aljarah$^1$ \and Loai Alnemer$^1$ \and Nouh Alhindawi$^2$}%
 
 %
 %\authorrunning{Lecture Notes in Computer Science: Authors' Instructions}
@@ -59,13 +67,22 @@
 
 % the affiliations are given next; don't give your e-mail address
 % unless you accept that it will be published
-\institute{King Abdullah II School for Information Technology\\
+\institute{$^1$King Abdullah II School for Information Technology\\
 The University of Jordan\\
 Amman, Jordan\\
 \mailsa\\
-%\mailsc\\
-%\url{http://www.springer.com/lncs}}
+$^2$Jadara University\\
+Faculty of Sciences and Information Technology\\
+Department of Software Engineering\\
+ Irbid, Jordan\\
+ \mailsc\\
 }
+
+
+
+
+%\url{http://www.springer.com/lncs}}
+
 %
 % NB: a more complex sample for affiliations and the mapping to the
 % corresponding authors can be found in the file "llncs.dem"
@@ -84,13 +101,13 @@ Software defect prediction is the process of identifying new bugs/defects in sof
  
 
 
-\keywords{}
+\keywords{Software Defect Prediction, SMOTE, Ensemble Approaches, Data Mining, Software Engineering}
 \end{abstract}
 
 
 \section{Introduction}
 
-Today, the task of developing and delivering a bug-free and high quality software product to the end users is becoming more and more challenging. Delivering high quality software product to the end users is ensured by software reliability and software quality assurance \cite{rawat2012software}. With the rapid growth in size and complexity of today's software, the prediction of software reliability plays a crucial rule in software development process \cite{zheng2009predicting}. According to \cite{hall2012systematic,arisholm2010systematic}, the quality of a software product is highly correlated to the presence or absence of the faults. Software fault  presents in a computer program as an error situation that is caused by wrong specification, incorrect programming logic, lack of programming and testing skills, and so forth \cite{dowd2006art,abaei2014survey,tomar2016prediction}. Defective software module hinders the software from working in the desired manner which further increases the development and maintenance costs and is responsible for customer dissatisfaction \cite{fenton2000software,fenton2014software}.
+Today, the task of developing and delivering a bug-free and high quality software product to the end users is becoming more and more challenging. Delivering high quality software product to the end users is ensured by software reliability and software quality assurance \cite{rawat2012software,aljarah2011selecting}. With the rapid growth in size and complexity of today's software, the prediction of software reliability plays a crucial rule in software development process \cite{zheng2009predicting}. According to \cite{hall2012systematic,arisholm2010systematic}, the quality of a software product is highly correlated to the presence or absence of the faults. Software fault  presents in a computer program as an error situation that is caused by wrong specification, incorrect programming logic, lack of programming and testing skills, and so forth \cite{dowd2006art,abaei2014survey,tomar2016prediction}. Defective software module hinders the software from working in the desired manner which further increases the development and maintenance costs and is responsible for customer dissatisfaction \cite{fenton2000software,fenton2014software}.
 
 Software defect prediction, which predicts defective software modules, can help the project manager and the software developers in assessing project progress, planning defect detection activities, evaluating product quality and assessing process performance for software management \cite{clark2001good}. Software defect prediction is very useful for finding bugs and prioritizing testing efforts especially when any company does not have sufficient resources for testing the entire product \cite{abaei2014survey,wang2016automatically}. In this context, researchers and practitioners have applied several statistical and machine learning techniques to predict the fault proneness models and reduce software development and maintenance costs. Among them, the machine learning technique is the most popular \cite{rawat2012software}. The majority of software fault prediction techniques builds models using metrics and faulty data from an earlier deployment or identical objects and then uses the models to predict whether modules presently under development contain defects, which is called supervised learning approaches \cite{abaei2014survey}.
 
@@ -157,7 +174,7 @@ In this work, we investigate the application of combining both approaches sequen
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.40]{Framework.eps}
+\includegraphics[scale=0.50]{Framework.eps}
 \caption{Hybrid SMOTE+Ensemble approach for bug prediction}
 \label{fig:fig1}
 \end{figure}
@@ -165,7 +182,7 @@ In this work, we investigate the application of combining both approaches sequen
 \begin{table}[H]
 \caption{Datasets Description}
 \begin{centering}
-\scalebox{0.6}{
+\scalebox{0.8}{
 \begin{tabular}{c c p{2.5cm} c c c c c c c }
 \hline 
 Dataset & Language & Description & \#Attributes & LOC & \#Modules & \#Non-defects  & \#Defects & \% Non-defects & \% Defects
@@ -239,7 +256,7 @@ All algorithms in our experiments are applied based on a 10 folds cross-validati
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{basicresults.eps}
 \caption{Evaluation results of basic classifiers.}
@@ -251,7 +268,7 @@ In the second stage of the experiments, the ensemble classifiers RF, Bagging and
 
 Number of iterations in ensemble learners could highly affect their performance. Therefore, all ensembles are experimented using different number of iterations starting from 10 up to 100 iterations with a step of 10 iterations increased in each experiment. The best performance of Bagging is obtained with 10 iterations for all datasets. For Adaboost it was obtained with 10 iterations for PC3 and JM1, and 20 iterations for CM1 and KC1. For RF, the best results are obtained with 30,50, 60 and 80 for CM1, PC3, JM1 and KC1, respectively. Evaluation results of best ensembles models compared to J48 which was the best in the previous stage are shown in the Figure \ref{fig:ensembles}. It can be seen that Adaboost obtained best results compared to the other classifiers with a noticeable improvement in G-mean and PD rates and very competitive low FP rates.
 
-\begin{figure*}[h]
+\begin{figure*}[H]
 \centering
 \includegraphics[scale=0.6]{Ensembles.eps}
 \caption{Evaluation results of ensemble classifiers and J48 decision tree model.}
@@ -293,21 +310,21 @@ Finally, the best obtained results of SMOTE combined Adaboost with all other cla
 
 
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Evaluation results for PC3 dataset}
 \begin{centering}
 \scalebox{0.7}{
-\begin{tabular}{l c c c c c }
+\begin{tabular}{l c c c c}
 \hline 
- & Accuracy & PF & PD & G-mean & AUC\tabularnewline
+ & Accuracy & PF & PD & G-mean\tabularnewline
 \hline 
-NB & 0.4826 & 0.5589 & 0.8469 & 0.6112 & 0.7668\tabularnewline
-J48 & 0.8814 & 0.0418 & 0.2081 & 0.4466 & 0.6304\tabularnewline
-MLP & 0.8820 & 0.0378 & 0.1788 & 0.4147 & 0.7812\tabularnewline
-RF & 0.9018 & 0.0149 & 0.1713 & 0.4107 & 0.8418\tabularnewline
-Bagging & 0.8912 & 0.0247 & 0.1531 & 0.3865 & 0.8195\tabularnewline
-AdaBoost & 0.8869 & 0.0433 & 0.2750 & 0.5129 & 0.8031\tabularnewline
-SMOTE+AdaBoost & 0.8772 & 0.0645 & 0.3656 & 0.5748 & 0.8106\tabularnewline
+NB & 0.4826 & 0.5589 & 0.8469 & 0.6112\tabularnewline
+J48 & 0.8814 & 0.0418 & 0.2081 & 0.4466\tabularnewline
+MLP & 0.8820 & 0.0378 & 0.1788 & 0.4147\tabularnewline
+RF & 0.9018 & 0.0149 & 0.1713 & 0.4107\tabularnewline
+Bagging & 0.8912 & 0.0247 & 0.1531 & 0.3865\tabularnewline
+AdaBoost & 0.8869 & 0.0433 & 0.2750 & 0.5129\tabularnewline
+SMOTE+AdaBoost & 0.8772 & 0.0645 & 0.3656 & 0.5748\tabularnewline
 \hline 
 \end{tabular}}
 \par\end{centering}
@@ -315,21 +332,21 @@ SMOTE+AdaBoost & 0.8772 & 0.0645 & 0.3656 & 0.5748 & 0.8106\tabularnewline
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Evaluation results for KC1 dataset}
 \begin{centering}
 \scalebox{0.7}{
-\begin{tabular}{l c c c c c}
+\begin{tabular}{l c c c c}
 \hline 
- & Accuracy & PF & PD & G-mean & AUC\tabularnewline
+ & Accuracy & PF & PD & G-mean\tabularnewline
 \hline 
-NB & 0.8246 & 0.0925 & 0.3715 & 0.5806 & 0.7909\tabularnewline
-J48 & 0.8404 & 0.0601 & 0.2964 & 0.5278 & 0.6963\tabularnewline
-MLP & 0.8565 & 0.0229 & 0.1963 & 0.4380 & 0.7852\tabularnewline
-RF & 0.8610 & 0.0402 & 0.3208 & 0.5548 & 0.8252\tabularnewline
-Bagging & 0.8582 & 0.0434 & 0.3200 & 0.5533 & 0.8123\tabularnewline
-AdaBoost & 0.8438 & 0.0665 & 0.3534 & 0.5743 & 0.7477\tabularnewline
-SMOTE+AdaBoost & 0.8329 & 0.0957 & 0.4424 & 0.6294 & 0.7700\tabularnewline
+NB & 0.8246 & 0.0925 & 0.3715 & 0.5806\tabularnewline
+J48 & 0.8404 & 0.0601 & 0.2964 & 0.5278\tabularnewline
+MLP & 0.8565 & 0.0229 & 0.1963 & 0.4380\tabularnewline
+RF & 0.8610 & 0.0402 & 0.3208 & 0.5548\tabularnewline
+Bagging & 0.8582 & 0.0434 & 0.3200 & 0.5533\tabularnewline
+AdaBoost & 0.8438 & 0.0665 & 0.3534 & 0.5743\tabularnewline
+SMOTE+AdaBoost & 0.8329 & 0.0957 & 0.4424 & 0.6294\tabularnewline
 \hline 
 \end{tabular}}
 \par\end{centering}
@@ -337,21 +354,21 @@ SMOTE+AdaBoost & 0.8329 & 0.0957 & 0.4424 & 0.6294 & 0.7700\tabularnewline
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Evaluation results for CM1 dataset}
 \begin{centering}
 \scalebox{0.7}{
-\begin{tabular}{l c c c c c}
+\begin{tabular}{l c c c c}
 \hline 
- & Accuracy & PF & PD & G-mean & AUC\tabularnewline
+ & Accuracy & PF & PD & G-mean\tabularnewline
 \hline 
-NB & 0.8484 & 0.0918 & 0.2985 & 0.5207 & 0.7382\tabularnewline
-J48 & 0.8805 & 0.0294 & 0.0550 & 0.2310 & 0.5591\tabularnewline
-MLP & 0.8825 & 0.0256 & 0.0400 & 0.1974 & 0.7586\tabularnewline
-RF & 0.8920 & 0.0165 & 0.0525 & 0.2272 & 0.7430\tabularnewline
-Bagging & 0.8865 & 0.0234 & 0.0610 & 0.2441 & 0.7290\tabularnewline
-AdaBoost & 0.8743 & 0.0468 & 0.1510 & 0.3794 & 0.6977\tabularnewline
-SMOTE+AdaBoost & 0.8536 & 0.0762 & 0.2110 & 0.3585 & 0.7100\tabularnewline
+NB & 0.8484 & 0.0918 & 0.2985 & 0.5207\tabularnewline
+J48 & 0.8805 & 0.0294 & 0.0550 & 0.2310\tabularnewline
+MLP & 0.8825 & 0.0256 & 0.0400 & 0.1974\tabularnewline
+RF & 0.8920 & 0.0165 & 0.0525 & 0.2272\tabularnewline
+Bagging & 0.8865 & 0.0234 & 0.0610 & 0.2441\tabularnewline
+AdaBoost & 0.8743 & 0.0468 & 0.1510 & 0.3794\tabularnewline
+SMOTE+AdaBoost & 0.8536 & 0.0762 & 0.2110 & 0.3585\tabularnewline
 \hline 
 \end{tabular}}
 \par\end{centering}
@@ -362,17 +379,17 @@ SMOTE+AdaBoost & 0.8536 & 0.0762 & 0.2110 & 0.3585 & 0.7100\tabularnewline
 \caption{Evaluation results for JM1 dataset}
 \begin{centering}
 \scalebox{0.7}{
-\begin{tabular}{l c c c c c}
+\begin{tabular}{l c c c c}
 \hline 
- & Accuracy & PF & PD & G-mean & AUC\tabularnewline
+ & Accuracy & PF & PD & G-mean\tabularnewline
 \hline 
-NB & 0.8042 & 0.0507 & 0.1993 & 0.4350 & 0.6901\tabularnewline
-J48 & 0.7973 & 0.0688 & 0.2394 & 0.4722 & 0.6677\tabularnewline
-MLP & 0.8100 & 0.0148 & 0.0799 & 0.2806 & 0.7050\tabularnewline
-RF & 0.8167 & 0.0450 & 0.2402 & 0.4789 & 0.7527\tabularnewline
-Bagging & 0.8118 & 0.0511 & 0.2406 & 0.4778 & 0.7280\tabularnewline
-AdaBoost & 0.7912 & 0.0958 & 0.3199 & 0.5378 & 0.6951\tabularnewline
-SMOTE+AdaBoost & 0.7787 & 0.1259 & 0.3808 & 0.5764 & 0.6986\tabularnewline
+NB & 0.8042 & 0.0507 & 0.1993 & 0.4350\tabularnewline
+J48 & 0.7973 & 0.0688 & 0.2394 & 0.4722\tabularnewline
+MLP & 0.8100 & 0.0148 & 0.0799 & 0.2806\tabularnewline
+RF & 0.8167 & 0.0450 & 0.2402 & 0.4789\tabularnewline
+Bagging & 0.8118 & 0.0511 & 0.2406 & 0.4778\tabularnewline
+AdaBoost & 0.7912 & 0.0958 & 0.3199 & 0.5378\tabularnewline
+SMOTE+AdaBoost & 0.7787 & 0.1259 & 0.3808 & 0.5764\tabularnewline
 \hline 
 \end{tabular}}
 \par\end{centering}
