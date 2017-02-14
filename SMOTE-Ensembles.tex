@@ -133,15 +133,15 @@ This paper is structured as follows: the ensemble classifiers applied in this wo
 
 \section{Ensemble classifiers}
 \label{ensembles}
-The main objective of the classification problem is to find the best hypothesis that produced the best prediction results. In many problem domains, even the well-suited problems, it is very difficult to find a good hypothesis that makes good predictions. In general, keeping many week hypothesis and combine their output is better than selecting the best one.
+The main objective of the classification problem is to find the best hypothesis that produced the best prediction results. In many problem domains, even the well-suited problems, it is very difficult to find a good hypothesis that makes good predictions. In general, keeping many weak hypothesis and combine their output is better than selecting the best one.
 In this section, we will describe three of the well-known ensemble techniques.
 
 \subsection{Bagging (Bootstrap Aggregation)}
 Bagging is an ensemble technique that is used to improve the classification results by combining the prediction of multiple classification methods \cite{Breiman1996}. The idea is to generate random training sets with replacement then train these random sets using any classification technique many times. And then, we use voting to predict the class label.
-Bagging works better for unstable  learning algorithm where a small changes in the training set result in large changes in predictions $(i.e, Decision Trees,  Neural Networks)$
+Bagging works better for unstable  learning algorithm where a small changes in the training set result in large changes in predictions $(i.e, Decision Trees,  Neural Networks)$.
 
 \subsection{Random Forests (RF)}
-Random Forest \cite{breiman2001random} is a special case of Bagging where it selects  random features on order to create bootstrap models using Decision Trees. The main idea of Random Forest algorithm is that it develops a large number of decision tree by selecting data and variables randomly.
+Random Forest \cite{breiman2001random} is a special case of Bagging where it selects  random features on order to create bootstrap models using Decision Trees. The main idea of Random Forest algorithm is that it develops a large number of decision trees by selecting data and variables randomly.
 Random Forest relies on aggregating the output from many "shallow" trees (called stumps) that are tuned and pruned without much analysis. The idea is that the errors from many "shallow" trees will disappear when aggregated and lead to a more accurate prediction.
 
 \subsection{AdaBoost}
