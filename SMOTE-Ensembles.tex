@@ -268,15 +268,15 @@ In the second stage of the experiments, the ensemble classifiers RF, Bagging and
 
 Number of iterations in ensemble learners could highly affect their performance. Therefore, all ensembles are experimented using different number of iterations starting from 10 up to 100 iterations with a step of 10 iterations increased in each experiment. The best performance of Bagging is obtained with 10 iterations for all datasets. For Adaboost, it was obtained with 10 iterations for PC3 and JM1, and 20 iterations for CM1 and KC1. For RF, the best results are obtained with 30, 50, 60 and 80 for CM1, PC3, JM1 and KC1, respectively. Evaluation results of best ensembles models compared to J48 which was the best in the previous stage are shown in the Figure \ref{fig:ensembles}. It can be seen that Adaboost obtained best results compared to the other classifiers with a noticeable improvement in G-mean and PD rates and very competitive low FP rates.
 
-\begin{figure*}[H]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{Ensembles.eps}
 \caption{Evaluation results of ensemble classifiers and J48 decision tree model.}
 \label{fig:ensembles}
-\end{figure*}
+\end{figure}
 
 
-In the last stage of the experiments, we experiment the effect of combining SMOTE with the best ensemble classifier from the previous stage which is Adaboost. In SMOTE there are two different parameters that influence its performance: number of nearest neighbors ($k$) to use and the percentage of SMOTE instances ($P$) to create. For the first parameters, the default number of 5 neighbors is used which was recommended in \cite{chawla2002smote}. While for the second parameter, different percentages are experimented starting from 20\% up to 200\%. Figure \ref{fig:smote+AB} shows the PD, PF and G-mean evaluation values of Adaboost when trained on datasets oversampled by SMOTE with different $P$ values. According this figure the best performance obtained for CM1 and KC1 datasets is at $P$ of 120\% and for JM1 and PC3 datasets is at 180\% and 200\%, respectively.
+In the last stage of the experiments, we experiment the effect of combining SMOTE with the best ensemble classifier from the previous stage which is Adaboost. In SMOTE, there are two different parameters that influence its performance: number of nearest neighbors ($k$) to use and the percentage of SMOTE instances ($P$) to create. For the first parameter, the default number of 5 neighbors is used which was recommended in \cite{chawla2002smote}. While for the second parameter, different percentages are experimented starting from 20\% up to 200\%. Figure \ref{fig:smote+AB} shows the PD, PF and G-mean evaluation values of Adaboost when trained on datasets oversampled by SMOTE with different $P$ values. According to this figure, the best performance obtained for CM1 and KC1 datasets is at $P$ of 120\% and for JM1 and PC3 datasets is at 180\% and 200\%, respectively.
 
 
  
@@ -306,7 +306,7 @@ In the last stage of the experiments, we experiment the effect of combining SMOT
 
 
 
-Finally, the best obtained results of SMOTE combined Adaboost with all other classifiers are shown in Table \ref{table:PC3results}, \ref{table:KC1results}, \ref{table:CM1results} and \ref{table:JM1results}, for PC3, KC1, CM1, JM1 datasets respectively. In JM1 and KC1 datasets, the SMOTE+Adaboost approach managed to achieve best results in terms of PD and G-mean with very competitive low PF rate. For PC3 dataset, we can see that although NB has the best results in terms of PD and G-mean, it has the worst FP rate which is very high at value of 55.89\%. On the other hand, SMOTE+Adaboost comes second with 36.56\%  for PD and 57.48\% for G-mean with low FP rate of 6.45\% which makes more favorable. For CM1, it can be seen that SMOTE enhanced the performance of Adaboost in all criteria but it comes second after NB. 
+Finally, the best obtained results of SMOTE combined Adaboost with all other classifiers are shown in Table \ref{table:PC3results}, \ref{table:KC1results}, \ref{table:CM1results} and \ref{table:JM1results}, for PC3, KC1, CM1, JM1 datasets respectively. In JM1 and KC1 datasets, the SMOTE+Adaboost approach managed to achieve best results in terms of PD and G-mean with very competitive low PF rate. For PC3 dataset, we can see that although NB has the best results in terms of PD and G-mean, it has the worst FP rate which is very high at value of 55.89\%. On the other hand, SMOTE+Adaboost comes second with 36.56\%  for PD and 57.48\% for G-mean with low FP rate of 6.45\% which makes it more favorable. For CM1, it can be seen that SMOTE enhanced the performance of Adaboost in all criteria but it comes second after NB. 
 
 
 
@@ -404,7 +404,7 @@ SMOTE+AdaBoost & 0.7787 & 0.1259 & 0.3808 & 0.5764\tabularnewline
 Delivering high quality software products on time within budgetary cost is crucial issue for the success of software companies. In order to help software developers in undertaking this issue, an attempt has been made in this paper for software defect prediction.
 
 This paper formulates the software defect prediction problem as a classification task. It further investigates the impact of several
-ensemble methods to solve the defect prediction problem. Specifically, we have developed a hybrid ensemble classification based on over-sampled approach for detecting software defects in different imbalanced datasets. High imbalanced distribution of classes in datasets deteriorates the performance of classification approaches. The proposed approach is developed based on the Synthetic Minority Over-sampling Technique (SMOTE). The experiments have shown that the proposed SMOTE+Ensembles approach has better quality results than the other classification algorithms. Our future research will include the verification of the proposed method on other datasets.
+ensemble methods to solve the defect prediction problem. Specifically, we have developed a hybrid ensemble classification based on over-sampled approach for detecting software defects in different imbalanced datasets. High imbalanced distribution of classes in datasets degrades the performance of classification approaches. The proposed approach is developed based on the Synthetic Minority Over-sampling Technique (SMOTE). The experiments have shown that the proposed SMOTE+Ensembles approach has better quality results than the other classification algorithms. Our future research will include the verification of the proposed method on other datasets.
 
 
 
